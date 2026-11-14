@@ -1,0 +1,20 @@
+# variables de entorno
+.env
+*.env
+!.env.example
+
+#logs
+*.log
+logs/
+
+# archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+#configuración local del editor
+.vscode/
+.idea/
+
+# comprimidos y respaldos
+*.zip
+*.bak
