@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserva de Horas Médicas | Centro Médico Cordillera</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="encabezado">
+    <div class="contenedor">
+      <h1>Centro Médico Cordillera</h1>
+      <p>Plataforma web de reserva de horas médicas</p>
+      <span class="aviso-demo">Entorno de demostración · datos ficticios</span>
+    </div>
+  </header>
+
+  <main class="contenedor grilla">
+    <!-- Formulario de reserva (simulado, no envía datos a ningún servidor) -->
+    <section class="tarjeta">
+      <h2>Reservar hora</h2>
+      <form id="form-reserva" autocomplete="off">
+        <label for="nombre">Nombre del paciente</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ej: Paciente Demo" required>
+
+        <label for="correo">Correo de contacto</label>
+        <input type="email" id="correo" name="correo" placeholder="paciente@ejemplo.cl" required>
+
+        <label for="especialidad">Especialidad</label>
+        <select id="especialidad" name="especialidad" required>
+          <option value="">Selecciona una especialidad</option>
+          <option>Medicina general</option>
+          <option>Pediatría</option>
+          <option>Cardiología</option>
+          <option>Dermatología</option>
+          <option>Traumatología</option>
+        </select>
+
+        <div class="fila">
+          <div>
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </div>
+          <div>
+            <label for="hora">Hora</label>
+            <select id="hora" name="hora" required>
+              <option value="">--:--</option>
+              <option>09:00</option>
+              <option>10:00</option>
+              <option>11:00</option>
+              <option>12:00</option>
+              <option>15:00</option>
+              <option>16:00</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="motivo">Motivo de consulta (opcional)</label>
+        <textarea id="motivo" name="motivo" rows="3" placeholder="Describe brevemente el motivo"></textarea>
+
+        <button type="submit">Solicitar hora</button>
+        <p id="mensaje" class="mensaje" role="status" hidden></p>
+      </form>
+    </section>
+
+    <aside>
+      <!-- Datos generales de atención -->
+      <section class="tarjeta">
+        <h2>Datos de atención</h2>
+        <ul class="lista-datos">
+          <li><strong>Horario:</strong> lunes a viernes, 08:30 a 18:00</li>
+          <li><strong>Sábados:</strong> 09:00 a 13:00</li>
+          <li><strong>Dirección:</strong> Av. Ejemplo 123, Santiago</li>
+          <li><strong>Teléfono:</strong> +56 2 0000 0000</li>
+          <li><strong>Anulaciones:</strong> hasta 24 horas antes</li>
+        </ul>
+      </section>
+
+      <!-- Estado del servicio -->
+      <section class="tarjeta">
+        <h2>Estado del servicio</h2>
+        <p class="estado"><span class="punto"></span> Operativo</p>
+        <ul class="lista-datos">
+          <li><strong>Servidor:</strong> Nginx (nginx:alpine)</li>
+          <li><strong>Entorno:</strong> contenedor Docker local</li>
+          <li><strong>Puerto:</strong> 8080</li>
+          <li><strong>Versión:</strong> 1.0.0</li>
+          <li><strong>Última carga:</strong> <span id="hora-carga">-</span></li>
+        </ul>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="pie">
+    <p>Proyecto DevOps · IACC 2026</p>
+  </footer>
+
+  <script>
+    // Hora de carga de la página, para mostrar que el servicio respondió
+    document.getElementById('hora-carga').textContent = new Date().toLocaleString('es-CL');
+
+    // La reserva es solo una simulación: no se envía ni guarda ningún dato
+    document.getElementById('form-reserva').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const especialidad = document.getElementById('especialidad').value;
+      const fecha = document.getElementById('fecha').value;
+      const hora = document.getElementById('hora').value;
+      const mensaje = document.getElementById('mensaje');
+      mensaje.textContent = 'Solicitud simulada: ' + especialidad + ' el ' + fecha + ' a las ' + hora + '. (No se enviaron datos)';
+      mensaje.hidden = false;
+      this.reset();
+    });
+  </script>
+</body>
+</html>
